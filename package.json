@@ -1,9 +1,8 @@
 {
-    "name": "express-boilerplate",
+    "name": "SpaceMakerServer",
     "version": "1.0.0",
-    "description": "project boilerplate",
+    "description": "project for server",
     "main": "index.js",
-    "repository": "https://github.com/nipatiitti/projectapi.git",
     "author": "Niilo Jaakkola <niilo.jaakkola@icloud.com>",
     "license": "MIT",
     "private": false,

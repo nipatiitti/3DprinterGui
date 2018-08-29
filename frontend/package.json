@@ -1,8 +1,8 @@
 {
-  "name": "react-redux-sass-boilerplate",
+  "name": "SpaceMaker",
   "version": "0.1.0",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",
     "material-ui": "^1.0.0-beta.30",
@@ -23,11 +23,11 @@
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "build-js": "react-scripts build",
     "start-js": "react-scripts start",
+    "build": "npm-run-all build-css build-js",
     "start": "npm-run-all -p watch-css start-js",
     "standard": "standard",
-    "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
@@ -35,8 +35,7 @@
     "standard": "^10.0.3"
   },
   "repository": {
-    "type": "git",
-    "url": "git@bitbucket.org:vertics/react-redux-sass-boilerplate.git"
+    "type": "git"
   },
   "proxy": "http://localhost:5000"
 }
