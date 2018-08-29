@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 
-import Header from '../components/Header'
+import Login from '../components/Login'
 
 const mapStateToProps = (state, props) => {
   return {
@@ -14,9 +14,9 @@ const mapDispatchToProps = (dispatch) => {
   return {}
 }
 
-const HeaderContainer = withRouter(connect(
+const LoginContainer = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Header))
+)(Login))
 
-export default HeaderContainer
+export default LoginContainer

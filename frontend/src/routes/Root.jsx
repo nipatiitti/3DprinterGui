@@ -13,6 +13,8 @@ import { Provider } from 'react-redux'
 
 import history from './history'
 
+import Login from '../containers/LoginContainer'
+
 const Root = ({ store, persistor }) => (
   <Provider store={store}>
     <PersistGate loading={<h1>Loading</h1>} persistor={persistor}>
@@ -20,7 +22,7 @@ const Root = ({ store, persistor }) => (
         <div className="root-container">
           <Switch>
             <Route exact path='/' >
-              <Header />
+              <Login />
             </Route>
           </Switch>
         </div>
