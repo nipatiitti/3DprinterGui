@@ -13,7 +13,7 @@ import { Provider } from 'react-redux'
 
 import history from './history'
 
-import Login from '../containers/LoginContainer'
+import Main from '../containers/MainContainer'
 
 const Root = ({ store, persistor }) => (
   <Provider store={store}>
@@ -22,7 +22,7 @@ const Root = ({ store, persistor }) => (
         <div className="root-container">
           <Switch>
             <Route exact path='/' >
-              <Login />
+              <Main />
             </Route>
           </Switch>
         </div>

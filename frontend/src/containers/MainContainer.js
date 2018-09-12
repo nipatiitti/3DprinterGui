@@ -1,11 +1,13 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import {socket} from '../socket'
 
-import Login from '../components/Login'
+import Main from '../components/Main'
 
 const mapStateToProps = (state, props) => {
   return {
+    socket,
     location: props.location
   }
 }
@@ -14,9 +16,9 @@ const mapDispatchToProps = (dispatch) => {
   return {}
 }
 
-const LoginContainer = withRouter(connect(
+const MainContainer = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login))
+)(Main))
 
-export default LoginContainer
+export default MainContainer

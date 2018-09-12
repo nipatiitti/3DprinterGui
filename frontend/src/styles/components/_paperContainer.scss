@@ -1,0 +1,27 @@
+.paperContainer {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    background-color: $blue;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .wide {
+        margin-top: 1em;
+        flex: 1;
+        max-width: 786px;
+    }
+
+    .shallow {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        max-width: 16em;
+    }
+}

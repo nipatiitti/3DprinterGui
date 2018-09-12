@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 
-import { postItemSchema } from './postItem'
+import { itemSchema } from './postItem'
 
 
-const postItemModel = mongoose.model('postItemSchema', postItemSchema);
+const itemModel = mongoose.model('itemModel', itemSchema);
 
-export { postItemModel }
+export { itemModel }

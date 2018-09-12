@@ -1,7 +1,11 @@
-import database from './database/connection'
+// import database from './database/connection'
 
 import { logErrors, errorHandler } from './error'
 import api from './routes'
+import { createSocket } from './socket'
+import CONFIG from './config'
+
+import server from 'http'
 import express from 'express'
 import path from 'path'
 import morgan from 'morgan'
@@ -9,13 +13,17 @@ import bodyParser from 'body-parser'
 
 
 const app = express()
-const PORT = process.env.PORT || 5000
+const http = server.Server(app)
+const PORT = CONFIG.port
 
-//Make sure database is up and running
-database.on('error', console.error.bind(console, 'connection error:'))
-database.once('open', () => {
-  console.log('We are live in action!')
-});
+// //Make sure database is up and running
+// database.on('error', console.error.bind(console, 'connection error:'))
+// database.once('open', () => {
+//   console.log('We are live in action!')
+// })
+
+// Initialize socket is working
+createSocket(http)
 
 // setup the logger
 app.use(morgan('tiny'))
@@ -46,7 +54,7 @@ app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, '../front-end/build', 'index.html'))
 })
 
-app.listen(PORT, () => {
+http.listen(PORT, () => {
   console.log("-----------starting-----------")
   console.log(`Listening on port ${PORT}`)
 });

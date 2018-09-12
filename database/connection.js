@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
-import config from'./config.json'
+import CONFIG from'../config'
 
 // Connect to the database in mongoDB atlas
-mongoose.connect(config.URL)
+mongoose.connect(`mongodb://${CONFIG.db_host}:${CONFIG.db_port}/${CONFIG.db_name}`)
 
 const db = mongoose.connection
 

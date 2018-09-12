@@ -1,19 +1,12 @@
-import { postItemModel } from '../database/models'
-import { validatePostItem } from '../validate'
+import { itemModel } from '../database/models'
 
 function handlePost(req, res) {
 
   if(validatePostItem(req.body)) {
 
     // Create instance of the data
-    const data = new postItemModel(Object.assign(req.body, {
-      type: 'math',
-      comments: [],
+    const data = new itemModel(Object.assign(req.body, {
       createdAt: Date.now(),
-      meta: {
-        upvotes: 0,
-        rating: 0
-      }
     }))
 
     // Save data
@@ -25,8 +18,7 @@ function handlePost(req, res) {
       res.json(req.body)
     })
   } else {
-    // If not valid
-    res.status(500).send({ msg: 'Not valid object' });
+    res.status(500).send({ msg: 'Not item object' });
   }
 
 }
