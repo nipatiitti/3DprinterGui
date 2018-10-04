@@ -29,8 +29,8 @@ class MotorDriver {
     }
 
     step(stepsToMove) {
-        const stepsLeft = Math.abs(stepsToMove)
-        const direction = 0
+        let stepsLeft = Math.abs(stepsToMove)
+        let direction = 0
 
         if (stepsToMove > 0) direction = 1
         if (stepsToMove < 0) direction = 0
