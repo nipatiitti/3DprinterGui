@@ -19,8 +19,10 @@
   },
   "scripts": {
     "build": "rimraf dist/ && babel-node ./ --out-dir dist/ --copy-files",
+    "build-motor": "rimraf motor-build/ && babel-node ./motorTest.js --out-dir /motor-build --copy-files",
     "start": "npm run build && node dist/index.js",
-    "hot-start": "nodemon --exec npm run build"
+    "hot-start": "nodemon --exec npm run build",
+    "motor-start": "nodemon --exec npm run build-motor"
   },
   "devDependencies": {
     "nodemon": "^1.17.2"
