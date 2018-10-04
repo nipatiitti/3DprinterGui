@@ -22,7 +22,7 @@ class MotorDriver {
         await pins.setup(this.pin2, gpio.DIR_OUT)
         await pins.setup(this.pin3, gpio.DIR_OUT)
         await pins.setup(this.pin4, gpio.DIR_OUT)
-
+        console.log(`Pins ${this.pin1}, ${this.pin1}, ${this.pin2}, ${this.pin3}, ${this.pin4} setupped and ready to roll`)
     }
 
     setSpeed(speed) {
