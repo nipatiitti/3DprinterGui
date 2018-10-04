@@ -8,6 +8,7 @@ const motorDriver = new MotorDriver(35, 36, 37, 38)
 let state = true
 
 const main = async () => {
+    await motorDriver.initalize()
     blink().catch(e => {
         console.log('Error: ', e.toString())
     })
