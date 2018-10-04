@@ -18,5 +18,5 @@ const blink = async () => {
 
 
 blink().catch(e => {
-    console.log('Error: ', err.toString())
+    console.log('Error: ', e.toString())
 })
