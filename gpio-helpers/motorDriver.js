@@ -13,7 +13,11 @@ class MotorDriver {
         this.pin2 = pin2
         this.pin3 = pin3
         this.pin4 = pin4
+        
+        this.initalize()
+    }
 
+    initalize = async () => {
         await pins.setup(pin1, gpio.DIR_OUT)
         await pins.setup(pin2, gpio.DIR_OUT)
         await pins.setup(pin3, gpio.DIR_OUT)
@@ -24,7 +28,7 @@ class MotorDriver {
         this.stepDelay = 60 * 1000 * 1000 / this.steps / speed
     }
 
-    step = (stepsToMove) => {
+    step = stepsToMove => {
         const stepsLeft = Math.abs(stepsToMove)
         const direction = 0
 
