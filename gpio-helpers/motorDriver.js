@@ -36,7 +36,7 @@ class MotorDriver {
         if (stepsToMove < 0) direction = 0
 
         while (stepsLeft > 0) {
-            const now = new Date().now()
+            const now = new Date().getTime()
             
             if (now - this.lastStep >= this.stepDelay) {
                 this.lastStep = now
