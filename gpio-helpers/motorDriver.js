@@ -18,10 +18,11 @@ class MotorDriver {
     }
 
     async initalize() {
-        await pins.setup(pin1, gpio.DIR_OUT)
-        await pins.setup(pin2, gpio.DIR_OUT)
-        await pins.setup(pin3, gpio.DIR_OUT)
-        await pins.setup(pin4, gpio.DIR_OUT)
+        await pins.setup(this.pin1, gpio.DIR_OUT)
+        await pins.setup(this.pin2, gpio.DIR_OUT)
+        await pins.setup(this.pin3, gpio.DIR_OUT)
+        await pins.setup(this.pin4, gpio.DIR_OUT)
+
     }
 
     setSpeed(speed) {
