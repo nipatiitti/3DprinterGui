@@ -2,13 +2,19 @@ import gpio from 'rpi-gpio'
 
 const pins = gpio.promise
 
-const main = async () => {
+let state = false
+
+const sleep = async ms => (
+    new Promise(resolve => setTimeout(resolve, ms))
+)
+
+const blink = async () => {
     await pins.setup(2, gpio.DIR_OUT)
-    pins.write(2, true)
+    await pins.write(2, state)
+    state != state
+    await sleep(500)
+    blink()
 }
 
 
-main()
-.catch((err) => {
-    console.log('Error: ', err.toString())
-})
+blink()
