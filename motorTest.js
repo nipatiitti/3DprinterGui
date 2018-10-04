@@ -9,8 +9,8 @@ const sleep = async ms => (
 )
 
 const blink = async () => {
-    await pins.setup(2, gpio.DIR_OUT)
-    await pins.write(2, state)
+    await pins.setup(3, gpio.DIR_OUT)
+    await pins.write(3, state)
     state != state
     await sleep(500)
     blink()
