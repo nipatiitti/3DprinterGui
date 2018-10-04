@@ -16,6 +16,7 @@ const sleep = async ms => (
 )
 
 const blink = async () => {
+    console.log("HERE FFS")
     await pins.write(3, state)
     state != state
     await sleep(500)
