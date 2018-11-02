@@ -3,7 +3,7 @@ import { MotorDriver } from './gpio-helpers'
 
 const pins = gpio.promise
 
-const motorDriver = new MotorDriver(35, 36, 37, 38)
+const motorDriver = new MotorDriver(31, 33, 35, 37)
 
 let state = true
 
