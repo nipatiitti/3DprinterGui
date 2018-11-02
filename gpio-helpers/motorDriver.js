@@ -58,6 +58,7 @@ class MotorDriver {
     }
 
     async stepMotor(thisStep) {
+        console.log(thisStep)
         switch (thisStep) {
             case 0:  // 1010
                 await pins.write(this.pin1, true)

@@ -19,11 +19,15 @@ const sleep = async ms => (
 )
 
 const blink = async () => {
-    console.log("They see me rolling they hatin")
-    motor()
-    state = !state
-    await sleep(3000)
-    blink()
+    try {
+        console.log("They see me rolling they hatin")
+        motor()
+        state = !state
+        await sleep(3000)
+        blink()    
+    } catch(e) {
+        console.log(e)
+    }
 }
 
 const motor = () => {
