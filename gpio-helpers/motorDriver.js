@@ -83,6 +83,7 @@ class MotorDriver {
                 await pins.write(this.dirPin, n > 0)
 
                 const steps = Math.abs(n) * this.SPR * this.mode.speed
+                console.log(steps + ' Steps to go')
         
                 for(let i = 0; i <= steps; i++) {
                     if(this.stop) {
