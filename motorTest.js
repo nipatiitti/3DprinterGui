@@ -9,6 +9,7 @@ let state = true
 
 const main = async () => {
     await motorDriver.initalize()
+    console.log('Initialized motors!')
     blink().catch(e => {
         console.log('Error: ', e.toString())
     })

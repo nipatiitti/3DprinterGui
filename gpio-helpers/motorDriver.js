@@ -60,6 +60,7 @@ class MotorDriver {
 
     step () {
         return new Promise(async (resolve, reject) => {
+            console.log('TUUURN')
             try {
                 await pins.write(this.stepPin, true)
                 await sleep(this.sleep/this.mode.speed)
@@ -75,11 +76,13 @@ class MotorDriver {
     revolutions (n) {
         return new Promise(async (resolve, reject) => {
             try {
+                console.log(`Starting ${Math.abs(n)} revolutions ${ n > 0 ? 'Clockwice' : 'Counter clockwice'}`)
                 await pins.write(this.dirPin, n > 0)
 
                 const steps = Math.abs(n) * this.SPR * this.mode.speed
         
                 for(let i = 0; i <= steps; i++) {
+                    console.log(`Step: ${i}; ${i/steps*100}%`)
                     if(this.stop) {
                         this.stop = false
                         reject({value: 500, message: 'Stopped by user'})
