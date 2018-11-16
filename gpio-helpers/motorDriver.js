@@ -40,7 +40,7 @@ class MotorDriver {
         this.sleep = 100
         this.modePins = modePins || [8, 10, 12]
         this.SPR = SPR || 200
-        this.mode = mode || MODES['1/16']
+        this.mode = MODES[mode] || MODES['1/16']
         this.stop = false
     }
 
@@ -85,7 +85,6 @@ class MotorDriver {
                 const steps = Math.abs(n) * this.SPR * this.mode.speed
         
                 for(let i = 0; i <= steps; i++) {
-                    console.log(`Step: ${i}; ${i/steps*100}%`)
                     if(this.stop) {
                         this.stop = false
                         reject({value: 500, message: 'Stopped by user'})
