@@ -66,9 +66,9 @@ class MotorDriver {
         return new Promise(async (resolve, reject) => {
             try {
                 await pins.write(this.stepPin, true)
-                //await sleep(this.sleep/this.mode.speed)
+                await sleep(this.sleep/this.mode.speed)
                 await pins.write(this.stepPin, false)
-                //await sleep(this.sleep/this.mode.speed)
+                await sleep(this.sleep/this.mode.speed)
                 resolve({value: 200})
             } catch (e) {
                 reject({value: 500, message: e.toString()})
