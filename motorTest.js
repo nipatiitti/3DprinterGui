@@ -40,6 +40,12 @@ main().catch(e => {
 })
 
 
+handleClose = () => {
+    motorDriver.clear()
+    console.log('Byeeeeee')
+    process.exit()
+}
+
 process.stdin.resume()
 
 //do something when app is closing

@@ -76,10 +76,8 @@ class MotorDriver {
         })
     }
 
-    clear (bool) {
-        if(bool) {
-            console.log('Byeeeeee')
-        }
+    clear () {
+        console.log('Clearing')
         pins.write(this.stepPin, false)
     }
 
