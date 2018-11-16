@@ -76,6 +76,13 @@ class MotorDriver {
         })
     }
 
+    clear (bool) {
+        if(bool) {
+            console.log('Byeeeeee')
+        }
+        pins.write(this.stepPin, false)
+    }
+
     revolutions (n) {
         return new Promise(async (resolve, reject) => {
             try {
@@ -94,6 +101,7 @@ class MotorDriver {
                     await this.step()
                 }
 
+                this.clear()
                 resolve({value: 200})
             } catch (e) {
                 reject({value: 500, message: e.toString()})

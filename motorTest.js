@@ -38,3 +38,19 @@ const motor = async () => {
 main().catch(e => {
     console.log('Error: ', e.toString())
 })
+
+
+process.stdin.resume()
+
+//do something when app is closing
+process.on('exit', motorDriver.clear(true))
+
+//catches ctrl+c event
+process.on('SIGINT', motorDriver.clear(true))
+
+// catches "kill pid" (for example: nodemon restart)
+process.on('SIGUSR1', motorDriver.clear(true))
+process.on('SIGUSR2', motorDriver.clear(true))
+
+//catches uncaught exceptions
+process.on('uncaughtException', motorDriver.clear(true))
