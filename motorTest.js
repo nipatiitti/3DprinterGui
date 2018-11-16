@@ -32,7 +32,7 @@ const blink = async () => {
 }
 
 const motor = async () => {
-    await motorDriver.resolve(2)
+    await motorDriver.revolutions(2)
 }
 
 main().catch(e => {

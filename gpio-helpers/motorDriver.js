@@ -59,7 +59,7 @@ class MotorDriver {
         await pins.write(this.modePins[1], this.mode.pins[1])
         await pins.write(this.modePins[2], this.mode.pins[2])
         
-        console.log(`Pins ${this.dirPin}, ${this.stepPin}, ${this.direction}, ${JSON.stringify(this.modePins, null, 2)}, setupped and ready to roll`)
+        console.log(`Pins ${this.dirPin}, ${this.stepPin}, ${JSON.stringify(this.modePins, null, 2)}, setupped and ready to roll`)
     }
 
     step () {
