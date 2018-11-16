@@ -40,7 +40,7 @@ class MotorDriver {
         this.sleep = 100
         this.modePins = modePins || [8, 10, 12]
         this.SPR = SPR || 200
-        this.mode = MODES[mode] || MODES['1/1']
+        this.mode = MODES[mode] || MODES['1/32']
         this.stop = false
     }
 
