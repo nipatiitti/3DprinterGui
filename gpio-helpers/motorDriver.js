@@ -2,87 +2,116 @@ import gpio from 'rpi-gpio'
 
 const pins = gpio.promise
 
-class MotorDriver {
-    constructor(pin1, pin2, pin3, pin4, steps) {
-        this.steps = steps || 200
-        this.stepNumber = 0
-        this.lastStep = 0
-        this.stepDelay = 60
+export const MODES = {
+    '1/1': {
+        pins: [false, false, false],
+        speed: 1
+    },
+    '1/2': {
+        pins: [true, false, false],
+        speed: 2
+    },
+    '1/4': {
+        pins: [false, true, false],
+        speed: 4
+    },
+    '1/8': {
+        pins: [true, true, false],
+        speed: 8
+    },
+    '1/16': {
+        pins: [false, false, true],
+        speed: 16
+    },
+    '1/32': {
+        pins: [true, false, true],
+        speed: 32
+    }
+}
 
-        this.pin1 = pin1
-        this.pin2 = pin2
-        this.pin3 = pin3
-        this.pin4 = pin4
+const sleep = async ms => (
+    new Promise(resolve => setTimeout(resolve, ms))
+)
+
+class MotorDriver {
+    constructor(dirPin, stepPin, modePins, SPR, mode) {
+        this.dirPin = dirPin || 38
+        this.stepPin = stepPin || 40
+        this.sleep = 100
+        this.modePins = modePins || [8, 10, 12]
+        this.SPR = SPR || 200
+        this.mode = mode || MODES['1/16']
+        this.stop = false
     }
 
     async initalize() {
-        await pins.setup(this.pin1, gpio.DIR_OUT)
-        await pins.setup(this.pin2, gpio.DIR_OUT)
-        await pins.setup(this.pin3, gpio.DIR_OUT)
-        await pins.setup(this.pin4, gpio.DIR_OUT)
-        console.log(`Pins ${this.pin1}, ${this.pin1}, ${this.pin2}, ${this.pin3}, ${this.pin4} setupped and ready to roll`)
+        await pins.setup(this.dirPin, gpio.DIR_OUT)
+        await pins.write(this.dirPin, true)
+
+        await pins.setup(this.stepPin, gpio.DIR_OUT)
+        this.modePins.forEach(async pin => await pins.setup(pin, gpio.DIR_OUT))
+
+        await pins.write(this.modePins[0], MODES[this.mode].pins[0])
+        await pins.write(this.modePins[1], MODES[this.mode].pins[1])
+        await pins.write(this.modePins[2], MODES[this.mode].pins[2])
+        
+        console.log(`Pins ${this.dirPin}, ${this.stepPin}, ${this.direction}, ${JSON.stringify(this.modePins, null, 2)}, setupped and ready to roll`)
     }
 
-    setSpeed(speed) {
-        this.stepDelay = 60 * 1000 * 1000 / this.steps / speed
-    }
-
-    step(stepsToMove) {
-        console.log("rolling")
-        let stepsLeft = Math.abs(stepsToMove)
-        let direction = 0
-
-        if (stepsToMove > 0) direction = 1
-        if (stepsToMove < 0) direction = 0
-
-        while (stepsLeft > 0) {
-            const now = new Date().getTime()
-            
-            if (now - this.lastStep >= this.stepDelay) {
-                this.lastStep = now
-                if (direction == 1) {
-                    this.stepNumber++
-                    if (this.stepNumber == this.steps) {
-                        this.stepNumber = 0
-                    }
-                } else {
-                    if (this.stepNumber == 0) {
-                        this.stepNumber = this.steps
-                    }
-                    this.stepNumber--
-                }
-                stepsLeft--
-                this.stepMotor(this.stepNumber % 4)
+    async step () {
+        return new Promise((resolve, reject) => {
+            try {
+                await pins.write(this.stepPin, true)
+                await sleep(this.sleep/this.mode.speed)
+                await pins.write(this.stepPin, false)
+                await sleep(this.sleep/this.mode.speed)
+                resolve({value: 200})
+            } catch (e) {
+                reject({value: 500, message: e.toString()})
             }
+        })
+    }
+
+    async revolutions (n) {
+        return new Promise((resolve, reject) => {
+            try {
+                await pins.write(this.dirPin, n > 0)
+
+                const steps = Math.abs(n) * this.SPR * this.mode.speed
+        
+                for(let i = 0; i <= steps; i++) {
+                    if(this.stop) {
+                        this.stop = false
+                        reject({value: 500, message: 'Stopped by user'})
+                    }
+
+                    await this.step()
+                }
+
+                resolve({value: 200})
+            } catch (e) {
+                reject({value: 500, message: e.toString()})
+            }
+        })
+    }
+
+    stop(bool) {
+        this.stop = bool || true
+    }
+
+    direction (direction) {
+        if(direction) {
+            this.direction = direction
+        } else {
+            return this.direction
         }
     }
 
-    async stepMotor(thisStep) {
-        switch (thisStep) {
-            case 0:  // 1010
-                await pins.write(this.pin1, true)
-                await pins.write(this.pin2, false)
-                await pins.write(this.pin3, true)
-                await pins.write(this.pin4, false)
-            break;
-            case 1:  // 0110
-                await pins.write(this.pin1, false)
-                await pins.write(this.pin2, true)
-                await pins.write(this.pin3, true)
-                await pins.write(this.pin4, false)
-            break;
-            case 2:  //0101
-                await pins.write(this.pin1, false)
-                await pins.write(this.pin2, true)
-                await pins.write(this.pin3, false)
-                await pins.write(this.pin4, true)
-            break;
-            case 3:  //1001
-                await pins.write(this.pin1, true)
-                await pins.write(this.pin2, false)
-                await pins.write(this.pin3, false)
-                await pins.write(this.pin4, true)
-            break;
+    mode (mode) {
+        if(mode && MODES.hasOwnProperty(mode)) {
+            this.mode = mode
+        } else {
+            return mode
         }
     }
 }

@@ -1,9 +1,9 @@
 import gpio from 'rpi-gpio'
-import { MotorDriver } from './gpio-helpers'
+import MotorDriver, { MODES } from './gpio-helpers'
 
 const pins = gpio.promise
 
-const motorDriver = new MotorDriver(31, 33, 35, 37)
+const motorDriver = new MotorDriver()
 
 let state = true
 
@@ -21,17 +21,17 @@ const sleep = async ms => (
 const blink = async () => {
     try {
         console.log("They see me rolling they hatin")
-        motor()
+        await motor()
         state = !state
-        await sleep(3000)
+        await sleep(1000)
         blink()    
     } catch(e) {
         console.log(e)
     }
 }
 
-const motor = () => {
-    motorDriver.step(state ? 200 : -200)
+const motor = async () => {
+    await motorDriver.resolve(2)
 }
 
 main().catch(e => {
