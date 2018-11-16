@@ -37,7 +37,7 @@ class MotorDriver {
     constructor(dirPin, stepPin, modePins, SPR, mode) {
         this.dirPin = dirPin || 38
         this.stepPin = stepPin || 40
-        this.sleep = 10
+        this.sleep = 5
         this.modePins = modePins || [8, 10, 12]
         this.SPR = SPR || 200
         this.mode = MODES[mode] || MODES['1/32']
