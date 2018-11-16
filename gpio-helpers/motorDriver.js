@@ -51,9 +51,9 @@ class MotorDriver {
         await pins.setup(this.stepPin, gpio.DIR_OUT)
         this.modePins.forEach(async pin => await pins.setup(pin, gpio.DIR_OUT))
 
-        await pins.write(this.modePins[0], MODES[this.mode].pins[0])
-        await pins.write(this.modePins[1], MODES[this.mode].pins[1])
-        await pins.write(this.modePins[2], MODES[this.mode].pins[2])
+        await pins.write(this.modePins[0], this.mode.pins[0])
+        await pins.write(this.modePins[1], this.mode.pins[1])
+        await pins.write(this.modePins[2], this.mode.pins[2])
         
         console.log(`Pins ${this.dirPin}, ${this.stepPin}, ${this.direction}, ${JSON.stringify(this.modePins, null, 2)}, setupped and ready to roll`)
     }
