@@ -64,7 +64,6 @@ class MotorDriver {
 
     step () {
         return new Promise(async (resolve, reject) => {
-            console.log('TUUURN')
             try {
                 await pins.write(this.stepPin, true)
                 await sleep(this.sleep/this.mode.speed)
