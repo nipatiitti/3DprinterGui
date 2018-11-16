@@ -92,7 +92,6 @@ class MotorDriver {
                     }
 
                     await this.step()
-                    console.log(i)
                 }
 
                 resolve({value: 200})
