@@ -37,7 +37,7 @@ class MotorDriver {
     constructor(dirPin, stepPin, modePins, SPR, mode) {
         this.dirPin = dirPin || 38
         this.stepPin = stepPin || 40
-        this.sleep = 100
+        this.sleep = 400
         this.modePins = modePins || [8, 10, 12]
         this.SPR = SPR || 200
         this.mode = MODES[mode] || MODES['1/16']
@@ -66,9 +66,9 @@ class MotorDriver {
         return new Promise(async (resolve, reject) => {
             try {
                 await pins.write(this.stepPin, true)
-                await sleep(this.sleep/this.mode.speed)
+                await sleep(this.sleep)
                 await pins.write(this.stepPin, false)
-                await sleep(this.sleep/this.mode.speed)
+                await sleep(this.sleep)
                 resolve({value: 200})
             } catch (e) {
                 reject({value: 500, message: e.toString()})
