@@ -1,5 +1,6 @@
-import MotorDriver from './motorDriver'
+import MotorDriver, { MODES } from './motorDriver'
 
 export {
-    MotorDriver
+    MotorDriver,
+    MODES
 }

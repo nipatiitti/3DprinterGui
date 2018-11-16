@@ -1,5 +1,5 @@
 import gpio from 'rpi-gpio'
-import MotorDriver, { MODES } from './gpio-helpers'
+import { MotorDriver, MODES } from './gpio-helpers'
 
 const pins = gpio.promise
 
