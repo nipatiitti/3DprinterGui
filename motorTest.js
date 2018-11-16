@@ -49,14 +49,14 @@ handleClose = () => {
 process.stdin.resume()
 
 //do something when app is closing
-process.on('exit', () => motorDriver.clear(true))
+process.on('exit', handleClose)
 
 //catches ctrl+c event
-process.on('SIGINT', () => motorDriver.clear(true))
+process.on('SIGINT', handleClose)
 
 // catches "kill pid" (for example: nodemon restart)
-process.on('SIGUSR1', () => motorDriver.clear(true))
-process.on('SIGUSR2', () => motorDriver.clear(true))
+process.on('SIGUSR1', handleClose)
+process.on('SIGUSR2', handleClose)
 
 //catches uncaught exceptions
-process.on('uncaughtException', () => motorDriver.clear(true))
+process.on('uncaughtException', handleClose)
