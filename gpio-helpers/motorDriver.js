@@ -58,8 +58,8 @@ class MotorDriver {
         console.log(`Pins ${this.dirPin}, ${this.stepPin}, ${this.direction}, ${JSON.stringify(this.modePins, null, 2)}, setupped and ready to roll`)
     }
 
-    async step () {
-        return new Promise((resolve, reject) => {
+    step () {
+        return new Promise(async (resolve, reject) => {
             try {
                 await pins.write(this.stepPin, true)
                 await sleep(this.sleep/this.mode.speed)
@@ -72,8 +72,8 @@ class MotorDriver {
         })
     }
 
-    async revolutions (n) {
-        return new Promise((resolve, reject) => {
+    revolutions (n) {
+        return new Promise(async (resolve, reject) => {
             try {
                 await pins.write(this.dirPin, n > 0)
 
