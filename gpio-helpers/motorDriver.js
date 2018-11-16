@@ -47,9 +47,13 @@ class MotorDriver {
     async initalize() {
         await pins.setup(this.dirPin, gpio.DIR_OUT)
         await pins.write(this.dirPin, true)
+        console.log("Direction pin setup'd")
 
         await pins.setup(this.stepPin, gpio.DIR_OUT)
-        this.modePins.forEach(async pin => await pins.setup(pin, gpio.DIR_OUT))
+
+        await pins.setup(this.modePins[0], gpio.DIR_OUT)
+        await pins.setup(this.modePins[1], gpio.DIR_OUT)
+        await pins.setup(this.modePins[2], gpio.DIR_OUT)
 
         await pins.write(this.modePins[0], this.mode.pins[0])
         await pins.write(this.modePins[1], this.mode.pins[1])
