@@ -40,7 +40,7 @@ main().catch(e => {
 })
 
 
-handleClose = () => {
+const handleClose = () => {
     motorDriver.clear()
     console.log('Byeeeeee')
     process.exit()
