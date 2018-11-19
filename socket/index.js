@@ -18,5 +18,6 @@ const connection = socket => {
 }
 
 const move = async steps => {
+    console.log('Moving to ' + steps)
     const response = await xMotor.to(steps)
 }
