@@ -11,7 +11,6 @@ import path from 'path'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 
-
 const app = express()
 const http = server.Server(app)
 const PORT = CONFIG.port
@@ -22,7 +21,7 @@ const PORT = CONFIG.port
 //   console.log('We are live in action!')
 // })
 
-// Initialize socket is working
+// Initialize socket
 createSocket(http)
 
 // setup the logger
@@ -32,7 +31,7 @@ app.use(morgan('tiny'))
 app.use(express.static(path.join(__dirname, '../front-end/build')))
 
 // Middlewares
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // Handling errors

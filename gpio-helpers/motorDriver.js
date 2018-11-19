@@ -42,6 +42,7 @@ class MotorDriver {
         this.SPR = SPR || 200
         this.mode = MODES[mode] || MODES['1/4']
         this.stop = false
+        this.steps = 0
     }
 
     async initalize() {
@@ -62,13 +63,14 @@ class MotorDriver {
         console.log(`Pins ${this.dirPin}, ${this.stepPin}, ${JSON.stringify(this.modePins, null, 2)}, setupped and ready to roll`)
     }
 
-    step () {
+    step (onStep = () => {}) {
         return new Promise(async (resolve, reject) => {
             try {
                 await pins.write(this.stepPin, true)
                 await sleep(this.sleep/this.mode.speed)
                 await pins.write(this.stepPin, false)
                 await sleep(this.sleep/this.mode.speed)
+                onStep()
                 resolve({value: 200})
             } catch (e) {
                 reject({value: 500, message: e.toString()})
@@ -76,35 +78,42 @@ class MotorDriver {
         })
     }
 
-    clear () {
-        console.log('Clearing')
-        pins.write(this.stepPin, false)
-    }
-
-    revolutions (n) {
+    rotate (n, onStep) {
         return new Promise(async (resolve, reject) => {
             try {
-                console.log(`Starting ${Math.abs(n)} revolutions ${ n > 0 ? 'Clockwice' : 'Counter clockwice'}`)
                 await pins.write(this.dirPin, n > 0)
-
-                const steps = Math.abs(n) * this.SPR * this.mode.speed
-                console.log(steps + ' Steps to go')
+                const multiplier = n > 0 ? 1 : -1
+                const steps = Math.abs(n)
         
                 for(let i = 0; i <= steps; i++) {
                     if(this.stop) {
                         this.stop = false
                         reject({value: 500, message: 'Stopped by user'})
                     }
-
-                    await this.step()
+    
+                    await this.step(onStep)
+                    this.steps += multiplier * 1
                 }
-
+    
                 this.clear()
                 resolve({value: 200})
             } catch (e) {
                 reject({value: 500, message: e.toString()})
             }
         })
+    }
+
+    async to (step, onStep) {
+        return await this.rotate(step-this.steps, onStep)
+    }
+
+    async clear () {
+        console.log('Clearing')
+        await pins.write(this.stepPin, false)
+    }
+
+    async revolutions (n) {
+        return await this.rotate(n * this.SPR * this.mode.speed)
     }
 
     stop(bool) {
