@@ -10,7 +10,7 @@ import main from './reducers/main'
 const persistConfig = {
   key: 'NAMEHERE_root',
   storage,
-  blacklist: []
+  blacklist: ['status']
 }
 
 const persistedReducer = persistReducer(persistConfig, main)

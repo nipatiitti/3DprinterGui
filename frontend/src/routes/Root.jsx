@@ -13,16 +13,23 @@ import { Provider } from 'react-redux'
 
 import history from './history'
 
-import Main from '../containers/MainContainer'
+import Main from '../components/Main'
+import Overlay from '../components/Overlay'
+
+const SendFile = () => <div>hjello</div>
 
 const Root = ({ store, persistor }) => (
   <Provider store={store}>
     <PersistGate loading={<h1>Loading</h1>} persistor={persistor}>
       <Router history={history}>
         <div className="root-container">
+          <Overlay />
           <Switch>
             <Route exact path='/' >
               <Main />
+            </Route>
+            <Route exact path='/sendfile' >
+              <SendFile />
             </Route>
           </Switch>
         </div>

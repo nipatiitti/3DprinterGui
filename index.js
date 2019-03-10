@@ -31,8 +31,8 @@ app.use(morgan('tiny'))
 app.use(express.static(path.join(__dirname, '../front-end/build')))
 
 // Middlewares
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json({limit: '50mb'}))
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
 
 // Handling errors
 app.use(logErrors)

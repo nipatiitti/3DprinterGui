@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
-import user from './user.js'
+import status from './status.js'
+import utils from './utils.js'
 
 
 const main = combineReducers({
-  user
+  status,
+  utils
 })
 
 export default main
