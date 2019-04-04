@@ -6,6 +6,12 @@ The backend uses [express.js](https://expressjs.com/) and [socket.io](https://so
 
 Entrypoint fro backend is [index.js](./index.js) and for frontend it's [frontend/src/index.js](./frontend/src/index.js)
 
+Frontend in idle mode
+![frontend](./frontend.png)
+
+Backend after user successfully connects
+![backend](./backend.png)
+
 ## Installation
 
 You need to install [node](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/lang/en/)
