@@ -4,7 +4,7 @@ This is a pure javascript project that has frontend and backend. The frontend is
 
 The backend uses [express.js](https://expressjs.com/) and [socket.io](https://socket.io/) to achieve fast and reliable realtime communicaton with the frontend. It also has [mongodb](https://www.mongodb.com/) for dynamic JSON datastorage to NoSQL database. The GPIO-ports are driven with [rpi-gpio](https://github.com/JamesBarwell/rpi-gpio.js).
 
-Entrypoint fro backend is [index.js](./index.js) and for frontend it's [frontend/src/index.js](./frontend/src/index.js)
+Entrypoint for backend is [index.js](./index.js) and for frontend it's [frontend/src/index.js](./frontend/src/index.js)
 
 Frontend in idle mode
 ![frontend](./frontend.png)
